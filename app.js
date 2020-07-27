@@ -213,6 +213,17 @@ var UIConstroller = (function () {
             for (i in array) {
                 elms[i].textContent = array[i] + '%';
             }
+        },
+
+        changeColor: function () {
+            var elms;
+            elms = Array.from(document.querySelectorAll(`${DOM.type} , ${DOM.description}, ${DOM.value}`));
+            for (el of elms) {
+                el.classList.toggle('red-focus');
+            }
+
+            document.querySelector(DOM.button).classList.toggle('red')
+
         }
     }
 
@@ -231,7 +242,9 @@ var Controller = (function (Budgetctrl, UIctrl) {
             }
         });
 
-        document.querySelector(DOM.container).addEventListener('click', removeItem)
+        document.querySelector(DOM.container).addEventListener('click', removeItem);
+
+        document.querySelector(DOM.type).addEventListener('change', UIctrl.changeColor);
     }
 
     var updatePercentage = function () {
